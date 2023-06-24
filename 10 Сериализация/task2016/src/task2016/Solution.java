@@ -18,7 +18,7 @@ Requirements:
 8. Класс C не должен явно поддерживать интерфейс Serializable.*/
 
 public class Solution {
-    public class A {
+    public class A implements Serializable {
         String name = "A";
 
         public A(String name) {

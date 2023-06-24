@@ -1,5 +1,7 @@
 package task2017;
 
+import java.io.IOException;
+import java.io.NotSerializableException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 
@@ -19,11 +21,21 @@ Requirements:
 6. Метод getOriginalObject должен возвращать null, если при попытке десериализации возникло исключение.*/
 
 public class Solution {
-    public A getOriginalObject(ObjectInputStream objectStream) {
-        return null;
+    public A getOriginalObject(ObjectInputStream objectStream) throws IOException, ClassNotFoundException {
+        A a = null;
+        try {
+            a = (A) objectStream.readObject();
+        } catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+        return a;
+
+//        return (A)objectStream.readObject();
+
     }
 
-    public class A {
+    public class A implements Serializable {
     }
 
     public class B extends A {

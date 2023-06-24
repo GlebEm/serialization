@@ -81,10 +81,26 @@ public class Solution {
         }
 
         public void save(OutputStream outputStream) throws Exception {
+            //File file = new File("testFile");
+            PrintWriter pw = new PrintWriter(outputStream); //
+            pw.println(this.name);
+
+            if (assets != null) {
+                for (Asset asset : assets) {
+                    pw.println(asset.getPrice());
+                    pw.println(asset.getName());
+                }
+            }
             //implement this method - реализуйте этот метод
         }
 
         public void load(InputStream inputStream) throws Exception {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            name = reader.readLine();
+            while (reader.ready()){
+                assets.add(new Asset(reader.readLine(),Double.parseDouble(reader.readLine())));
+            }
+            reader.close();
             //implement this method - реализуйте этот метод
         }
     }

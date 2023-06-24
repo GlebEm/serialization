@@ -23,7 +23,7 @@ Requirements:
 5. Программа должна выполняться без ошибок.
 6. При десериализации должны корректно восстанавливаться значение полей nameA и nameB.*/
 
-public class Solution {
+public class Solution implements Serializable {
     public static class A {
 
         protected String nameA = "A";
@@ -31,9 +31,12 @@ public class Solution {
         public A(String nameA) {
             this.nameA += nameA;
         }
+
+        public A() {
+        }
     }
 
-    public class B extends A implements Serializable {
+    public class B extends A implements Serializable { //В сигнатуре класса В ошибки нет :).
 
         private String nameB;
 
@@ -42,9 +45,22 @@ public class Solution {
             this.nameA += nameA;
             this.nameB = nameB;
         }
+
+        private void writeObject(ObjectOutputStream out) throws IOException {
+            out.defaultWriteObject();
+            out.writeObject(nameA);
+
+        }
+
+        private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+            in.defaultReadObject();
+            this.nameA = (String) in.readObject();
+
+        }
+
     }
 
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException { //В методе main ошибок нет.
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(arrayOutputStream);
 

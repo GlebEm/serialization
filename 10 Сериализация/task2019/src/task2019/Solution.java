@@ -25,6 +25,7 @@ public class Solution implements Serializable {
         Solution solution = new Solution();
         outputStream.writeObject(solution);
 
+
         fileOutput.close();
         outputStream.close();
 
@@ -33,6 +34,7 @@ public class Solution implements Serializable {
         ObjectInputStream objectStream = new ObjectInputStream(fiStream);
 
         Solution loadedObject = (Solution) objectStream.readObject();
+       // loadedObject.Solution();
 
         fiStream.close();
         objectStream.close();
@@ -47,7 +49,7 @@ public class Solution implements Serializable {
         return m;
     }
 
-    public void Solution() {
+    public  Solution() {    //был объявлен void - метод, а должен быть конструктор
         m.put("Mickey", "Mouse");
         m.put("Mickey", "Mantle");
     }

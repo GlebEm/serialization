@@ -14,7 +14,7 @@ Requirements:
 4. Класс ClassWithStatic должен поддерживать интерфейс Serializable.*/
 
 public class Solution {
-    public static class ClassWithStatic {
+    public static class ClassWithStatic implements Serializable {
         public static String staticString = "This is a static test string";
         public int i;
         public int j;
